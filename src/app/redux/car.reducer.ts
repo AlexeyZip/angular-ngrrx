@@ -1,5 +1,4 @@
-import { AddCar, CAR_ACTION } from './cars.action';
-import { Action } from "@ngrx/store";
+import { CAR_ACTION, CarsAction } from './cars.action';
 import { Car } from "../car.model";
 
 const initialState = {
@@ -9,13 +8,18 @@ const initialState = {
     ]
 }
 
-export function carsReducer(state = initialState, action: AddCar) {
+export function carsReducer(state = initialState, action: CarsAction) {
     switch (action.type) {
         case CAR_ACTION.ADD_CAR:
             return {
                 ...state,
                 cars: [...state.cars, action.payload]
             }  
+        case CAR_ACTION.DELETE_CAR: 
+            return {
+                ...state,
+                cars: [...state.cars.filter(c => c.id !== action.payload.id)]
+            } 
         default: 
             return state
     }

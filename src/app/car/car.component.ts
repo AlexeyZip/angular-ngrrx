@@ -1,6 +1,8 @@
+import { DeleteCar } from './../redux/cars.action';
+import { AppState } from './../redux/app.state';
 import { Car } from './../car.model';
-import { Component, Input, Output } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-car',
@@ -9,10 +11,9 @@ import { EventEmitter } from '@angular/core';
 })
 export class CarComponent {
   @Input() car: Car
-  @Output() deleteCar = new EventEmitter<Car>()
-
+  constructor(private store: Store<AppState>) {}
   onDelete() {
-    this.deleteCar.emit(this.car)
+    this.store.dispatch(new DeleteCar(this.car))
   }
 
   onBuy() {
