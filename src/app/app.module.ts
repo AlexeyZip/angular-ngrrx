@@ -1,3 +1,4 @@
+import { CarsService } from './cars.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -7,6 +8,7 @@ import { CarComponent } from './car/car.component';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { carsReducer } from './redux/car.reducer';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,9 @@ import { carsReducer } from './redux/car.reducer';
     CarComponent
   ],
   imports: [
-    BrowserModule, FormsModule, StoreModule.forRoot({carPage: carsReducer})
+    BrowserModule,HttpModule, FormsModule, StoreModule.forRoot({carPage: carsReducer})
   ],
-  providers: [],
+  providers: [CarsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

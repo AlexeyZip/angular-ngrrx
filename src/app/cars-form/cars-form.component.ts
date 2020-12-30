@@ -1,3 +1,4 @@
+import { CarsService } from './../cars.service';
 import { AddCar } from './../redux/cars.action';
 import { AppState } from './../redux/app.state';
 import { Car } from './../car.model';
@@ -17,7 +18,7 @@ export class CarsFormComponent {
   carModel: string = ''
 
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private service: CarsService) { }
 
 
   onAdd() {
@@ -39,7 +40,7 @@ export class CarsFormComponent {
   }
 
   onLoad() {
-
+    this.service.loadCars()
   }
 
 }
