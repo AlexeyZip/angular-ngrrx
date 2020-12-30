@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { CarsEffect } from './redux/cars.effect';
 import { CarsService } from './cars.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +12,9 @@ import { StoreModule } from '@ngrx/store';
 import { carsReducer } from './redux/car.reducer';
 import { HttpModule } from '@angular/http';
 import { EffectsModule } from '@ngrx/effects';
+import { RouterModule } from '@angular/router';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,16 @@ import { EffectsModule } from '@ngrx/effects';
     CarComponent
   ],
   imports: [
-    BrowserModule,HttpModule,EffectsModule.forRoot([CarsEffect]), FormsModule, StoreModule.forRoot({carPage: carsReducer})
+    BrowserModule,
+    HttpModule,
+    EffectsModule.forRoot([CarsEffect]),
+    FormsModule,
+    StoreModule.forRoot({carPage: carsReducer}),
+    RouterModule.forRoot([
+      {path: '', component: AppComponent}
+    ]),
+    StoreRouterConnectingModule,
+   environment.production? [] : StoreDevtoolsModule.instrument()
   ],
   providers: [CarsService],
   bootstrap: [AppComponent]
